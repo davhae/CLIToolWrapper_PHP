@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Slim 3</title>
+        <title>SlimToolWrapper</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <style>
             body {
@@ -26,17 +26,35 @@
         </style>
     </head>
     <body>
-        <h1>Slim</h1>
+        <h1>SlimToolWrapper</h1>
 
+        <form action="/">
+            <button>HOME</button>
+        </form>
         <form action="/core/checkToolDependencies">
             <button>Check core tool dependencies</button>
         </form>
+        <form action="/toolController/nmap">
+            <button>Nmap Controller</button>
+        </form>
 
-
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
+        <?php if (isset($toolDependencies)) : ?>
+            <br><table style="margin: 0px auto">
+                <thead>
+                    <th>Tool</th>
+                    <th>Status</th>
+                    <th>Version</th>
+                </thead>
+                <tbody>
+                <?php foreach ($toolDependencies as $toolName => $toolStatus) : ?>
+                    <tr>
+                        <td><?= $toolName ?></td>
+                        <td><?= $toolStatus["status"] ?></td>
+                        <td><?= $toolStatus["version"] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php endif; ?>
     </body>
 </html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Slim 3</title>
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            margin: 50px 0 0 0;
+            padding: 0;
+            width: 100%;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        h1 {
+            color: #719e40;
+            letter-spacing: -3px;
+            font-family: 'Lato', sans-serif;
+            font-size: 100px;
+            font-weight: 200;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>SlimToolWrapper</h1>
+<form action="/">
+    <button>HOME</button>
+</form>
+
+<form action="/toolController/nmap" method="post">
+    <h2>Target</h2>
+    <label for="ip">IP or Subnet</label>
+    <input type="text" name="ip" id="ip" value="localhost"><br><br>
+
+    <h2>ScanType</h2>
+    <label for="fast">Fast Scan (top 100 ports)</label>
+    <input type="radio" name="scanType" id="fast" value="fast"><br>
+
+    <label for="ping">Only Ping Scan</label>
+    <input type="radio" name="scanType" id="ping" value="ping"><br>
+
+    <label for="commonPorts">Common Ports</label>
+    <input type="radio" name="scanType" id="commonPorts" value="commonPorts"><br>
+
+    <label for="port">Custom Port Range/List</label>
+    <input type="radio" name="scanType" id="port" value="port"><br>
+
+    <label for="portRange"></label>
+    <input type="text" name="portRange" id="portRange" style="display:none"><br>
+
+    <div id="aggro">
+        <h2>Aggressivity</h2>
+        <label for="versionDetection">Version Detection</label>
+        <input type="checkbox" name="versionDetection" id="versionDetection">
+
+        <label for="osDetection">OS Detection</label>
+        <input type="checkbox" name="osDetection" id="osDetection">
+
+        <label for="scriptDetection">Script Detection (default)</label>
+        <input type="checkbox" name="scriptDetection" id="scriptDetection">
+
+    </div><br>
+
+    <button>Go..</button>
+</form>
+
+<?php if (isset($toolDependencies)) : ?>
+    <br><table style="margin: 0px auto">
+        <thead>
+        <th>Tool</th>
+        <th>Status</th>
+        <th>Version</th>
+        </thead>
+        <tbody>
+        <?php foreach ($toolDependencies as $toolName => $toolStatus) : ?>
+            <tr>
+                <td><?= $toolName ?></td>
+                <td><?= $toolStatus["status"] ?></td>
+                <td><?= $toolStatus["version"] ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+
+<script type="application/javascript" src="/js/nmap.js"></script>
+</body>
+</html>
