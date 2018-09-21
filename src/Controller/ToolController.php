@@ -21,9 +21,9 @@ class ToolController
         $parameterQuery .= " " . $endParam;
         $query = $EXEC . $parameterQuery;
 
-        //$result = shell_exec($query);
+        $result = shell_exec($query);
 
-        return $query;
+        return $result;
     }
 
     public function createParameterQuery($paramArray) {
