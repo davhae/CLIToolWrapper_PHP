@@ -23,7 +23,7 @@ class ToolController
 
         $result = shell_exec($query);
 
-        return $result;
+        return $query . "  #############   " . $result;
     }
 
     public function createParameterQuery($paramArray) {

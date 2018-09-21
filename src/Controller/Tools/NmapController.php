@@ -41,6 +41,18 @@ class NmapController
         if (isset($_POST["scriptDetection"])) {
             array_push($customQuery, '-sC');
         }
+        if (isset($_POST["scriptDetection"])) {
+            array_push($customQuery, '-sC');
+        }
+        if (isset($_POST["timing"])) {
+            array_push($customQuery, $req->getParam("timing"));
+        }
+        if (isset($_POST["fragment"])) {
+            array_push($customQuery, "-f");
+        }
+        if ($req->getParam("decoy") !== "") {
+            array_push($customQuery, "-D " . $req->getParam("decoy"));
+        }
 
 
         $parameterQuery = $TC->createParameterQuery($customQuery);

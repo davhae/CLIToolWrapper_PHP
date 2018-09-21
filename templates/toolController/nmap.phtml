@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-<h1>'Slim'ToolWrapper</h1>
+<h1>'Slim'ToolWrapper - Nmap</h1>
 <form action="/">
     <button>HOME</button>
 </form>
@@ -34,7 +34,7 @@
 <form action="/toolController/nmap" method="post">
     <h2>Target</h2>
     <label for="ip">IP or Subnet</label>
-    <input type="text" name="ip" id="ip" value="localhost"><br><br>
+    <input type="text" name="ip" id="ip" value="localhost"><br>
 
     <h2>ScanType</h2>
     <label for="fast">Fast Scan (top 100 ports)</label>
@@ -50,7 +50,7 @@
     <input type="radio" name="scanType" id="port" value="port"><br>
 
     <label for="portRange"></label>
-    <input type="text" name="portRange" id="portRange" style="display:none"><br>
+    <input type="text" name="portRange" id="portRange" style="display:none">
 
     <div id="aggro">
         <h2>Aggressivity</h2>
@@ -63,9 +63,35 @@
         <label for="scriptDetection">Script Detection (default)</label>
         <input type="checkbox" name="scriptDetection" id="scriptDetection">
 
-    </div><br>
+    </div>
 
-    <button>Go..</button>
+    <div id="timing">
+        <h2>Timing and Performance</h2>
+        Paranoid and Sneaky may prevent detection/alerts from IDS but they will take an extrordinary amount of time.<br>
+        <select name="timing">
+            <option value="-T0">Paranoid (one port at a time)</option>
+            <option value="-T1">Sneaky</option>
+            <option value="-T2">Polite</option>
+            <option value="-T3" selected="selected">Normal</option>
+            <option value="-T4">Aggressive (with decent broadband connection)</option>
+            <option value="-T5">Insane</option>
+        </select>
+
+        <!-- TODO: —min-hostgroup 2048 -->
+    </div>
+
+    <div id="firewall">
+        <h2>Firewall/IDS Evasion and Spoofing</h2>
+        <label for="fragment">Fragment Packages</label>
+        <input type="checkbox" name="fragment" id="fragment"><br>
+
+        <label for="decoy">Decoys - It appears that other IP’s are also scanning the network</label>
+        <input type="text" name="decoy" id="decoy" placeholder="194.x.x.x,194.x.x.x">
+
+        <!-- TODO: spoof, sourceport, badsum, adler32-->
+    </div>
+
+    <br><button>Go..</button>
 </form>
 
 <?php if (isset($toolDependencies)) : ?>
