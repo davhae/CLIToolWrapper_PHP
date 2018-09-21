@@ -50,7 +50,7 @@
     <input type="radio" name="scanType" id="port" value="port"><br>
 
     <label for="portRange"></label>
-    <input type="text" name="portRange" id="portRange" style="display:none">
+    <input type="text" name="portRange" id="portRange" placeholder="22,80" style="display:none">
 
     <div id="aggro">
         <h2>Aggressivity</h2>
@@ -89,6 +89,15 @@
         <input type="text" name="decoy" id="decoy" placeholder="194.x.x.x,194.x.x.x">
 
         <!-- TODO: spoof, sourceport, badsum, adler32 -->
+    </div>
+
+    <div id="otherStuff">
+        <h2>Other Stuff</h2>
+        <label for="verbose">Verbose Run</label>
+        <input type="checkbox" name="verbose" id="verbose"><br>
+
+        <label for="verbose">Output webXML</label>
+        <input type="checkbox" name="ox" id="ox">
     </div>
 
     <br><button>Go..</button>

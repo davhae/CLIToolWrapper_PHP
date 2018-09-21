@@ -8,7 +8,7 @@ use davhae\lampiao\Controller\ToolController;
 // Routes
 $app->get('/test', function (Request $request, Response $response) {
     $TC = new ToolController();
-    return $TC->execute("EXEC_NMAP", "localhost","-p 20", "-F");
+    return $TC->execute("EXEC_NMAP", "localhost", null,"-p 20", "-F");
 });
 
 $app->get('/[{name}]', function (Request $request, Response $response, array $args) {

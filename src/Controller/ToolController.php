@@ -10,7 +10,7 @@ class ToolController
     const EXEC_DIRB = "dirb ";
     const EXEC_NIKTO = "nikto ";
 
-    public function execute($EXEC_CONST, $endParam = "", ...$params) {
+    public function execute($EXEC_CONST, $endParam = "", $resultPath, ...$params) {
 
         $EXEC = $this->getConstFromVariable($EXEC_CONST);
 
@@ -23,7 +23,14 @@ class ToolController
 
         $result = shell_exec($query);
 
-        return $query . "  #############   " . $result;
+        if ($resultPath !== null) {
+            $pwd = shell_exec("pwd | tr -d '\n'");
+            $resultLink = "file:" . $pwd . "/" . $resultPath;
+        } else {
+            $resultLink = "";
+        }
+
+        return $query . "  #############   " . $result . "<a href='$resultLink'>Result File</a>";
     }
 
     public function createParameterQuery($paramArray) {

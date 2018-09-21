@@ -53,11 +53,19 @@ class NmapController
         if ($req->getParam("decoy") !== "") {
             array_push($customQuery, "-D " . $req->getParam("decoy"));
         }
+        if (isset($_POST["verbose"])) {
+            array_push($customQuery, "-v");
+        }
+        $resultPath = "results/nmap/" . $req->getParam("ip") . ".xml";
+        if (isset($_POST["ox"])) {
+
+            array_push($customQuery, "--webxml -oX " . "\"" . $resultPath . "\"");
+        }
 
 
         $parameterQuery = $TC->createParameterQuery($customQuery);
 
 
-        return $TC->execute("EXEC_NMAP", $req->getParam("ip"), $scanType, $parameterQuery);
+        return $TC->execute("EXEC_NMAP", $req->getParam("ip"), $resultPath, $scanType, $parameterQuery);
     }
 }
